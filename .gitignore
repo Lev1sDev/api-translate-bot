@@ -1,7 +1,24 @@
 .git/*
+env/
 venv/
-.venv/
 .venv
-.env/
-.env
+.venv/
 
+__pycache__/
+*.py[cod]
+
+.idea
+*.env
+.env
+.DS_Store
+.AppleDouble
+.LSOverride
+
+*.sublime-project
+*.sublime-workspace
+
+static/
+posts/static/
+media/
+
+db.sqlite3
