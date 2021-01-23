@@ -55,22 +55,21 @@ def send_hi(bot, update):
         f'Чтобы начать пользоваться словарём, просто введите любое слово '
         f'и укажите язык перевода (напр. "Словарь ru-de") '
         f'\nВарианты языков: en - английский; ru - русский; uk - украинский; '
-        f'tr - турецкий.'
+        f'tr - турецкий; de - немецкий. '
         f'\n\nРеализовано с помощью сервиса «API «Яндекс.Словарь» '
         f'http://api.yandex.ru/dictionary'
     )
 
 
 def get_message(bot, update):
-    bot_client = telegram.Bot(token=TELEGRAM_TOKEN)
     text = update.message.text
     try:
         queryset = get_translate_queryset(text)
-        send_message(get_client_text(queryset), bot_client)
+        update.message.reply_text(get_client_text(queryset))
         logging.info('Сообщение отправлено')
     except Exception as e:
         logging.error(f'Бот столкнулся с ошибкой: {e}')
-        send_message('Бот столкнулся с ошибкой', bot_client)
+        update.message.reply_text('Бот столкнулся с ошибкой')
         time.sleep(5)
 
 
