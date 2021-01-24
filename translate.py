@@ -3,7 +3,6 @@ import os
 import time
 
 import requests
-import telegram
 from dotenv import load_dotenv
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
@@ -21,11 +20,33 @@ def get_client_text(word):
     word_anm = word.get('anm')
     word_tr = word.get('tr')
     words_list = []
-    for words, words_mean in zip(word_tr, word_tr.get('mean')):
-        words_list.append(
-            f'\n{words.get("text")}, род: {words.get("gen")}, '
-            f'значение: {words_mean.get("text")}'
-        )
+    for words in word_tr:
+        if words.get("mean") and words.get("gen"):
+            words_list.append(
+                f'\n{words.get("text")}, род: {words.get("gen")}, '
+                f'значение:'
+            )
+            for mean in words.get("mean"):
+                words_list.append(
+                    f'{mean.get("text")},'
+                )
+        elif words.get("mean"):
+            words_list.append(
+                f'\n{words.get("text")}, '
+                f'значение:'
+            )
+            for mean in words.get("mean"):
+                words_list.append(
+                    f'{mean.get("text")},'
+                )
+        elif words.get("gen"):
+            words_list.append(
+                f'\n{words.get("text")}, род: {words.get("gen")},'
+            )
+        else:
+            words_list.append(
+                f'\n{words.get("text")}'
+            )
     return (
         f'{word_txt}, род: {word_gen}, предмет: {word_anm}\n'
         f'Найдено {len(word_tr)} перевода:\n'
