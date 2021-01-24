@@ -21,8 +21,11 @@ def get_client_text(word):
     word_anm = word.get('anm')
     word_tr = word.get('tr')
     words_list = []
-    for words in word_tr:
-        words_list.append(f'\n{words.get("text")}, род: {words.get("gen")}')
+    for words, words_mean in zip(word_tr, word_tr.get('mean')):
+        words_list.append(
+            f'\n{words.get("text")}, род: {words.get("gen")}, '
+            f'значение: {words_mean.get("text")}'
+        )
     return (
         f'{word_txt}, род: {word_gen}, предмет: {word_anm}\n'
         f'Найдено {len(word_tr)} перевода:\n'
