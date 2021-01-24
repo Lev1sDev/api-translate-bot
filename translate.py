@@ -50,7 +50,7 @@ def get_client_text(word):
     return (
         f'{word_txt}, род: {word_gen}, предмет: {word_anm}\n'
         f'Найдено {len(word_tr)} перевода:\n'
-        f'{",".join(words_list)}'
+        f'{" ".join(words_list)}'
         f'\n\nРеализовано с помощью сервиса «API «Яндекс.Словарь» '
         f'http://api.yandex.ru/dictionary'
     )
