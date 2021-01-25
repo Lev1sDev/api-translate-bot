@@ -108,7 +108,7 @@ def main():
     dispatcher.add_handler(
         MessageHandler(Filters.text, get_message)
     )
-    updater.start_polling(poll_interval=6.0)
+    updater.start_polling()
     updater.idle()
 
 
